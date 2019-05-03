@@ -1,0 +1,9 @@
+version: '3'
+services:
+  varnish:
+    build: .
+    command: /etc/init.d/varnish start
+    volumes:
+      - ./varnish:/etc/varnish/
+    ports:
+      - "80:80"
