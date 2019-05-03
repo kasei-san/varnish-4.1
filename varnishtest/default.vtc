@@ -1,0 +1,24 @@
+varnishtest "example"
+
+server s1 {
+    rxreq
+    expect req.url == "/"
+    txresp
+}
+server s1 -start
+
+varnish v1 -vcl+backend {
+    include "/etc/varnish/default.vcl";
+} -start
+
+client c1 {
+    txreq -url "/"
+    rxresp
+    expect resp.status == 200
+    expect resp.http.X-Cache == "MISS"
+
+    txreq -url "/"
+    rxresp
+    expect resp.status == 200
+    expect resp.http.X-Cache == "MISS"
+} -run

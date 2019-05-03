@@ -9,3 +9,9 @@ $ docker-compose start
 ```
 $ docker-compose run --rm varnish varnishd -C -f /etc/varnish/default.vcl
 ```
+
+### varnishtest
+
+```
+$ docker-compose run --rm varnish varnishtest /etc/varnishtest/default.vtc
+```
